@@ -1,0 +1,13 @@
+version: "3.7"
+
+services:
+  terraform:
+    image: hashicorp/terraform:${TF_IMAGE_VERSION}
+    volumes:
+      - ../.terraform:/app/terraform
+      - $HOME/.ssh/id_rsa:/root/.ssh/id_rsa
+      - $HOME/.terraformrc:/root/.terraformrc
+      #- $HOME/.terraform.d:/root/.terraform.d
+    working_dir: /app/terraform/environments/${ENVIRONMENT}
+    env_file:
+      - ./.env
